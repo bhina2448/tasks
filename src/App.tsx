@@ -1,7 +1,9 @@
 import React from "react";
 import "./App.css";
 import { Button } from "react-bootstrap";
-import { Container } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function App(): JSX.Element {
     return (
@@ -18,15 +20,29 @@ function App(): JSX.Element {
                 <Row>
                     <Col>
                         <img src="Diesel.JPG" alt="Old Man Diesel" />
-                        pets
+                        <div
+                            style={{
+                                width: "50%",
+                                height: "100px",
+                                backgroundColor: "red"
+                            }}
+                        ></div>
                     </Col>
                     <Col>
+                        pets
                         <ul>
                             <li>Diesel</li>
                             <li>Bryson</li>
                             <li>Roni</li>
                             <li>Tigger</li>
                         </ul>
+                        <div
+                            style={{
+                                width: "50%",
+                                height: "100px",
+                                backgroundColor: "red"
+                            }}
+                        ></div>
                     </Col>
                 </Row>
             </Container>
