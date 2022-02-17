@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import diesel from "./Diesel.jpg";
 
 function App(): JSX.Element {
     return (
@@ -19,7 +20,7 @@ function App(): JSX.Element {
             <Container>
                 <Row>
                     <Col>
-                        <img src="Diesel.JPG" alt="Old Man Diesel" />
+                        <img src={diesel} alt="Old Man Diesel" />
                         <div
                             style={{
                                 width: "50%",
