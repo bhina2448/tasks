@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import diesel from "./Diesel.jpg";
+import diesel from "./DieselPic.jpg";
 
 function App(): JSX.Element {
     return (
