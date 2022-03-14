@@ -8,10 +8,12 @@ import { duplicateQuestion } from "./objects";
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    const publishedQuestions = questions.filter(
-        (questions: Question): boolean => !questions.published
+    const questionsCopy = questions.map(
+        (question: Question): Question => ({ ...question })
     );
-    return publishedQuestions;
+    return questionsCopy.filter(
+        (question: Question): boolean => question.published
+    );
 }
 
 /**
@@ -20,11 +22,16 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    const nonEmptyQuestions = questions.filter(
+    const questionsCopy = questions.map(
+        (question: Question): Question => ({ ...question })
+    );
+    const nonEmptyQuestions = questionsCopy.filter(
         (question: Question): boolean =>
-            question.body === "" &&
-            question.expected === "" &&
-            question.options === []
+            !(
+                question.body === "" &&
+                question.expected === "" &&
+                question.options.length === 0
+            )
     );
     return nonEmptyQuestions;
 }
@@ -53,7 +60,7 @@ export function findQuestion(
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
     return questions.filter(
-        (question: Question): boolean => question.id === id
+        (question: Question): boolean => question.id !== id
     );
 }
 
@@ -112,6 +119,8 @@ export function toCSV(questions: Question[]): string {
                 "," +
                 question.options.length +
                 "," +
+                question.points +
+                "," +
                 question.published
         )
         .join("\n");
@@ -126,14 +135,13 @@ export function toCSV(questions: Question[]): string {
 export function makeAnswers(questions: Question[]): Answer[] {
     const answers = questions.map(
         (question: Question): Answer => ({
-            ...question,
             questionId: question.id,
             text: "",
             submitted: false,
             correct: false
         })
     );
-    return [];
+    return answers;
 }
 
 /***
@@ -151,9 +159,9 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    const firstType = questions[0].type;
+    const firstQuestion = questions[0];
     return questions.every(
-        (question: Question): boolean => question.type === firstType
+        (question: Question): boolean => question.type === firstQuestion.type
     );
 }
 
@@ -232,7 +240,7 @@ export function addOption(
     optionIndex: number
 ): Question {
     if (optionIndex === -1) {
-        const newOptions = { ...question.options, newOption };
+        const newOptions = [...question.options, newOption];
         return { ...question, options: newOptions };
     } else {
         const newOptions = [...question.options];
@@ -276,10 +284,17 @@ export function duplicateQuestionInArray(
     newId: number
 ): Question[] {
     const questionsCopy = questions.map(
-        (question: Question): Question =>
-            question.id === targetId
-                ? { ...question, ...duplicateQuestion(newId, question) }
-                : { ...question }
+        (question: Question): Question => ({ ...question })
     );
-    return questionsCopy;
+    const targetIndex = questions.findIndex(
+        (question: Question): boolean => question.id === targetId
+    );
+    const targetQuestion = findQuestion(questions, targetId);
+    if (targetQuestion !== null) {
+        const duplicate = duplicateQuestion(newId, targetQuestion);
+        questionsCopy.splice(targetIndex + 1, 0, duplicate);
+        return questionsCopy;
+    } else {
+        return questionsCopy;
+    }
 }
