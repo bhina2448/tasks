@@ -221,6 +221,25 @@ export function changeQuestionTypeById(
 }
 
 /**
+ * helper function for editOption
+ * Takes in a question and an option to be added to that questions options along with the index for where it will be inserted
+ * returns a Question with an edited 'option' array
+ */
+export function addOption(
+    question: Question,
+    newOption: string,
+    optionIndex: number
+): Question {
+    if (optionIndex === -1) {
+        const newOptions = { ...question.options, newOption };
+        return { ...question, options: newOptions };
+    } else {
+        const newOptions = [...question.options];
+        newOptions.splice(optionIndex, 1, newOption);
+        return { ...question, options: newOptions };
+    }
+}
+/**
  * Consumes an array of Questions and produces a new array of Questions, where all
  * the Questions are the same EXCEPT for the one with the given `targetId`. That
  * Question should be the same EXCEPT that its `option` array should have a new element.
@@ -236,7 +255,12 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    return questions.map(
+        (question: Question): Question =>
+            question.id === targetId
+                ? addOption(question, newOption, targetOptionIndex)
+                : { ...question }
+    );
 }
 
 /***
