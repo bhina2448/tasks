@@ -39,10 +39,10 @@ export function TwoDice(): JSX.Element {
             <div>Two Dice</div>
             <div>
                 <span>
-                    Left Die: <span>{leftDie}</span>
+                    Left Die: <span data-testid="left-die">{leftDie}</span>
                 </span>
                 <span>
-                    Right Die: <span>{rightDie}</span>
+                    Right Die: <span data-testid="right-die">{rightDie}</span>
                 </span>
             </div>
             <div>

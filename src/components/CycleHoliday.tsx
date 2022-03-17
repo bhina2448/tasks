@@ -29,15 +29,12 @@ export function CycleHoliday(): JSX.Element {
     }
     return (
         <div>
-            <div>Cycle Holiday</div>
             <div>💔 Valentines Day: February 14</div>
             <div>🧽😡🦑 Annoy Squidward Day: February 15</div>
             <div>🎂 Brielles Birthday: June 1</div>
             <div>🇳🇴🇮🇸 Leif Erikson Day: October 9</div>
             <div>🎄 Christmas: December 25</div>
-            <div>
-                Holiday:<span>{holiday}</span>
-            </div>
+            <div>Holiday: {holiday}</div>
             <div>
                 <Button onClick={changeAlphabetically}>
                     Advance By Alphabet
