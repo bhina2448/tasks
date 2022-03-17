@@ -12,5 +12,46 @@ export function d6(): number {
 }
 
 export function TwoDice(): JSX.Element {
-    return <div>Two Dice</div>;
+    const [leftDie, setLeftDie] = useState<number>(1);
+    const [rightDie, setRightDie] = useState<number>(6);
+
+    //if true is given to this function it will roll the left die
+    //if false is given to this function it will roll thr right die
+    function rollDie(isLeft: boolean): void {
+        if (isLeft) {
+            setLeftDie(d6());
+        } else {
+            setRightDie(d6());
+        }
+    }
+    //Checks if game has been won or lost and returns a string accordingly to be printed
+    function checkStatus(): string {
+        if (leftDie === 1 && rightDie === 1) {
+            return "Snake Eyes! You Lose!";
+        } else if (leftDie === rightDie) {
+            return "You Win!";
+        } else {
+            return "Game In Progess";
+        }
+    }
+    return (
+        <div>
+            <div>Two Dice</div>
+            <div>
+                <span>
+                    Left Die: <span>{leftDie}</span>
+                </span>
+                <span>
+                    Right Die: <span>{rightDie}</span>
+                </span>
+            </div>
+            <div>
+                <Button onClick={() => rollDie(true)}>Roll Left</Button>
+                <Button onClick={() => rollDie(false)}>Roll Right</Button>
+            </div>
+            <div>
+                <span>{checkStatus()}</span>
+            </div>
+        </div>
+    );
 }
