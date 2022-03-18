@@ -15,15 +15,18 @@ export function ChooseTeam(): JSX.Element {
     const [team, setTeam] = useState<string[]>([]);
 
     function chooseMember(newMember: string) {
-        if (!team.includes(newMember)) {
-            const newTeam = [...team, newMember];
-            setTeam(newTeam);
-        }
+        const newTeam = [...team, newMember];
+        setTeam(newTeam);
+        const options = allOptions.filter(
+            (option: string): boolean => option != newMember
+        );
+        setAllOptions(options);
     }
 
     function clearTeam() {
         const emptyTeam: string[] = [];
         setTeam(emptyTeam);
+        setAllOptions(PEOPLE);
     }
 
     return (
