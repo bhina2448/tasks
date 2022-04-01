@@ -36,7 +36,7 @@ export function EditMode(): JSX.Element {
                 />
             </div>
             <div>
-                <span>{displayStudent}</span>
+                <span>{displayStudent()}</span>
             </div>
             <div>
                 <span>
