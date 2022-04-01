@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 
 export function EditMode(): JSX.Element {
     const [inEditMode, setMode] = useState<boolean>(false);
@@ -26,35 +26,41 @@ export function EditMode(): JSX.Element {
             <div>
                 <h3>Edit Mode</h3>
             </div>
-            <div>
-                <Form.Check
-                    type="switch"
-                    id="in-editMode-check"
-                    label="edit mode"
-                    checked={inEditMode}
-                    onChange={changeMode}
-                />
-            </div>
-            <div>
-                <span>{displayStudent()}</span>
-            </div>
-            <div>
-                <span>
-                    <Form.Group controlId="formStudentName">
-                        <Form.Label>Name:</Form.Label>
-                        <Form.Control
-                            value={name}
-                            onChange={changeName}
-                            disabled={!inEditMode}
-                        />{" "}
-                    </Form.Group>
-                </span>
-                <span>
-                    <Button onClick={changeStatus} disabled={!inEditMode}>
-                        {isStudent ? "Remove Student" : "Add Student"}
-                    </Button>
-                </span>
-            </div>
+
+            <Form>
+                <Row>
+                    <Form.Check
+                        type="switch"
+                        id="in-editMode-check"
+                        checked={inEditMode}
+                        onChange={changeMode}
+                    />
+                </Row>
+                <Row>
+                    <span>{displayStudent()}</span>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group controlId="formStudentName" as={Row}>
+                            <Form.Label column sm={2}>
+                                Name:
+                            </Form.Label>
+                            <Col>
+                                <Form.Control
+                                    value={name}
+                                    onChange={changeName}
+                                    disabled={!inEditMode}
+                                />{" "}
+                            </Col>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Button onClick={changeStatus} disabled={!inEditMode}>
+                            {isStudent ? "Remove Student" : "Add Student"}
+                        </Button>
+                    </Col>
+                </Row>
+            </Form>
         </div>
     );
 }

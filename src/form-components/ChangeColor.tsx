@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 
 export function ChangeColor(): JSX.Element {
     const colors = [
@@ -21,23 +21,27 @@ export function ChangeColor(): JSX.Element {
             <div>
                 <h3>Change Color</h3>
             </div>
-            <div>
-                <ul>
-                    {colors.map((color: string) => (
-                        <li key={color}>
-                            <Form.Check
-                                type="radio"
-                                name="Colors"
-                                onChange={updateColor}
-                                id={color + "-id"}
-                                label={color}
-                                value={color}
-                                checked={chosen === color}
-                            />
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <Form>
+                <Row>
+                    <ul>
+                        {colors.map((color: string) => (
+                            <li key={color}>
+                                <Col sm={3}>
+                                    <Form.Check
+                                        type="radio"
+                                        name="Colors"
+                                        onChange={updateColor}
+                                        id={color + "-id"}
+                                        label={color}
+                                        value={color}
+                                        checked={chosen === color}
+                                    />
+                                </Col>
+                            </li>
+                        ))}
+                    </ul>
+                </Row>
+            </Form>
             <div>
                 You have chosen{" "}
                 <span style={{ backgroundColor: chosen }}>{chosen}.</span>

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 
 export function GiveAttempts(): JSX.Element {
     const [attempts, setAttempts] = useState<number>(3);
     const [additions, setAdditions] = useState<number>(0);
     function updateAdditions(event: React.ChangeEvent<HTMLInputElement>) {
         setAdditions(parseInt(event.target.value));
-        setAttempts(attempts + additions);
     }
     function updateAttempts(newAttempts: number) {
         setAttempts(newAttempts);
@@ -17,15 +16,42 @@ export function GiveAttempts(): JSX.Element {
                 <h3>Give Attempts</h3>{" "}
             </div>
             <div>
-                <button onClick={() => updateAttempts(attempts - 1)}>
-                    use
-                </button>
-            </div>
-            <div>
-                <Form.Group controlId="formAdditions">
-                    <Form.Control type="number" value={additions} />
-                </Form.Group>
-                <button onClick={() => updateAdditions}>gain</button>
+                <Form>
+                    <Row>
+                        <Col>
+                            Attempts: <span>{attempts}</span>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <button
+                                onClick={() => updateAttempts(attempts - 1)}
+                            >
+                                use
+                            </button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form.Group controlId="formAdditions">
+                                <Form.Control
+                                    type="number"
+                                    value={additions}
+                                    onChange={updateAdditions}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col sm={3}>
+                            <button
+                                onClick={() =>
+                                    updateAttempts(additions + attempts)
+                                }
+                            >
+                                gain
+                            </button>
+                        </Col>
+                    </Row>
+                </Form>
             </div>
         </div>
     );
