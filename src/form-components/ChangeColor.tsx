@@ -44,7 +44,12 @@ export function ChangeColor(): JSX.Element {
             </Form>
             <div>
                 You have chosen{" "}
-                <span style={{ backgroundColor: chosen }}>{chosen}.</span>
+                <span
+                    data-testid="colored-box"
+                    style={{ backgroundColor: chosen }}
+                >
+                    {chosen}.
+                </span>
             </div>
         </div>
     );
