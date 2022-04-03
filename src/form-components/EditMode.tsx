@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 
 export function EditMode(): JSX.Element {
     const [inEditMode, setMode] = useState<boolean>(false);
