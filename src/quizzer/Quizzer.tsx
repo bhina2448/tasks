@@ -1,10 +1,11 @@
 import React from "react";
+import plan from "./TaskImage.jpg";
 
 export function Quizzer(): JSX.Element {
     return (
         <div>
             <h3>Quizzer</h3>
-            <img src="TaskImage.jpg" alt="plan for quizzer" />
+            <img src={plan} alt="plan for quizzer" />
         </div>
     );
 }
